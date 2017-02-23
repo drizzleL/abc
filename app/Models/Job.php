@@ -19,6 +19,7 @@ class Job extends BaseModel
         'district' => 'array:,',
         'address'  => 'array:,',
     ];
+    protected $appends = ['addtime_cn'];
 
     public function scopeAvailable($query)
     {

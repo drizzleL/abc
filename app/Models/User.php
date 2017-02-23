@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SpecialistJob;
 use App\Models\BaseModel;
+use Laravel\Passport\HasApiTokens;
 
 class User extends BaseModel implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -19,6 +20,7 @@ class User extends BaseModel implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
     use SoftDeletes;
+    use HasApiTokens;
 
     protected $dates = ['deleted_at'];
     protected $fillable = ['uid', 'username', 'role', 'avatar', 'name'];

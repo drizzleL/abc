@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use Cache;
+use Auth;
 
 class JobsController extends Controller
 {
@@ -15,16 +17,16 @@ class JobsController extends Controller
     // show job detail by specific ID
     public function show($id)
     {
-        return Job::find($id);
+        $job = Job::find($id);
+        // $job->star_status = Cache::get('job_'.$id.'_star_status', false);
+        return $job;
     }
 
     // show job list
     public function index(Request $request)
     {
         $jobs = $this->job_model;
-        if ($request->sort_by) {
-            $jobs = $jobs->orderBy($request->sort_by);
-        }
+        $jobs = $jobs->orderBy('id', 'desc');
         $jobs = $jobs->paginate();
         return $jobs;
     }
@@ -32,6 +34,7 @@ class JobsController extends Controller
     // Star job
     public function star($id)
     {
+        Cache::forever('job_'.$id.'_star_status', true);
         return;
     }
 
@@ -41,6 +44,7 @@ class JobsController extends Controller
         if ($this->checkRecordExists($id)) {
             return;
         } else {
+            Cache::forget('job_'.$id.'_star_status');
             return '1';
         }
     }

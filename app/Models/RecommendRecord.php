@@ -197,4 +197,9 @@ class RecommendRecord extends BaseModel
         return JobApply::whereType('hunter')->where('job_id', $this->job_id)
             ->where('personal_uid', $this->candidate_uid)->latest('id')->first();
     }
+
+    public function scopeOpen($query)
+    {
+        return $query->where('status', '>', 0)->where('status', '<', 8);
+    }
 }

@@ -24,4 +24,9 @@ Route::resource('companies', 'CompaniesController', ['only' => ['index', 'show']
 Route::resource('records', 'RecordsController', ['only' => ['index', 'show']]);
 Route::resource('companies.jobs', 'Companies\JobsController', ['only' => ['index']]);
 Route::resource('leads', 'LeadsController', ['only' => ['index', 'show', 'store']]);
+Route::get('statistics/{name}', 'StatisticsController@getStatistics');
+//Route::group(['prefix' => 'statistics'], function () {
+//    Route::get('record', 'StatisticsController@record');
+//    Route::get('record', 'StatisticsController@record');
+//});
 

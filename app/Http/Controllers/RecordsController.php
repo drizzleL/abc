@@ -8,14 +8,13 @@ use Auth;
 
 class RecordsController extends Controller
 {
-    public function __construct(RecommendRecord $record_repo)
+    public function index(Request $request)
     {
-        $this->record_repo = $record_repo;
-    }
-    public function index()
-    {
-        $record = $this->record_repo;
-        $record = $record->whereUserId(21);
+        $record = new RecommendRecord;
+        $record = $record->whereUserId(Auth::id());
+        if ($request->state == 'open') {
+            $record = $record->open();
+        }
         return $record->paginate();
     }
     public function show($id)
@@ -25,4 +24,5 @@ class RecordsController extends Controller
             ->findOrFail($id);
         return $record;
     }
+
 }

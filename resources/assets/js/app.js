@@ -29,14 +29,14 @@ Vue.component(
 Vue.component('example', require('./components/Example.vue'));
 
 const LeadForm = Vue.component('lead-form', require('./components/LeadForm.vue'));
-const JobIndex = Vue.component('job-index', require('./components/JobIndex.vue'));
+// const JobIndex = Vue.component('job-index', require('./components/JobIndex.vue'));
 
 Vue.use(Router);
 
 const Bar = { template: '<div>bar</div>' }
 
 const routes = [
-  { path: '/jobs', component: JobIndex },
+  // { path: '/jobs', component: JobIndex },
   { path: '/bar', component: Bar },
   { path: '/leads/create', component: LeadForm },
 ]

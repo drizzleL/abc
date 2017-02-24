@@ -9,10 +9,6 @@ use Auth;
 
 class JobsController extends Controller
 {
-    public function __construct(Job $job_model)
-    {
-        $this->job_model = $job_model;
-    }
 
     // show job detail by specific ID
     public function show($id)
@@ -25,7 +21,7 @@ class JobsController extends Controller
     // show job list
     public function index(Request $request)
     {
-        $jobs = $this->job_model;
+        $jobs = new Job;
         $jobs = $jobs->orderBy('id', 'desc');
         $jobs = $jobs->paginate();
         return $jobs;
